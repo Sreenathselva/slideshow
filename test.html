@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+        #home {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .home-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .home-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            background-size: cover;
+            transition: opacity 1s ease-in-out; /* Smooth transition */
+        }
+        .slide1 {
+            background: url(../test/slide1.webp) no-repeat;
+        }
+        .slide2 {
+            background: url(../test/slide2.webp) no-repeat;
+        }
+        .slide3 {
+            background: url(../test/slide3.webp) no-repeat;
+        }
+        .home-slide.active {
+            opacity: 1; /* Make active slide visible */
+        }
+    </style>
+</head>
+<body>
+    <div id="home">
+        <div class="home-slider">
+            <div class="home-slide slide1"></div>
+            <div class="home-slide slide2"></div>
+            <div class="home-slide slide3"></div>
+        </div>
+        <div class="home-patch"></div>
+    </div>
+    <script>
+        // JavaScript to handle the slideshow
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.home-slide');
+            let currentSlide = 0;
+
+            // Function to switch slides
+            const changeSlide = () => {
+                // Remove active class from all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                // Add active class to the current slide
+                slides[currentSlide].classList.add('active');
+                // Move to the next slide
+                currentSlide = (currentSlide + 1) % slides.length; // Loop back to the first slide
+            };
+
+            // Initialize the slideshow
+            changeSlide(); // Show the first slide immediately
+            setInterval(changeSlide, 5000); // Change slide every 5 seconds
+        });
+    </script>
+</body>
+</html>
